@@ -3,6 +3,7 @@ const { v4: uuid } = require('uuid');
 const db = require('../../database');
 
 class ContacsRepository {
+
   async findAll(orderBy = 'ASC'){
     const direction = orderBy.toUpperCase() == 'DESC' ? 'DESC' : 'ASC';
     const allRows = await db.query(`SELECT * FROM contacts ORDER BY name ${direction}`);

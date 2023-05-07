@@ -15,6 +15,11 @@ class CategoryRepository{
     return user;
   }
 
+  async findByName(name){
+    const [user] = await db.query('SELECT * FROM categories WHERE name=$1', [name]);
+    return user;
+  }
+
   async delete(id){
     await db.query('DELETE FROM categories WHERE id=$1', [id]);
   }

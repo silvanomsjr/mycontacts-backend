@@ -68,10 +68,12 @@ class ContactController {
   async delete(req, res){
     //Deletar registro
     const id = req.params.id;
+    const userExists = await ContactsRepository.findById(id)
+    if(!userExists){
+      return res.status(404).json({ error: 'User not found.' });
+    }
     await ContactsRepository.delete(id);
-
     res.sendStatus(204);
-
   }
 }
 

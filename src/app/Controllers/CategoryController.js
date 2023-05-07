@@ -30,6 +30,11 @@ class ContactController {
       return res.status(400).json({ error: 'Name is required.'});
     }
 
+    const nameAlreadyExists = await CategoriesRepository.findByName(name);
+    if(nameAlreadyExists){
+      return res.status(400).json({ error: 'Name already in use.' });
+    }
+
     const category = await CategoriesRepository.create(name);
 
     res.json(category);
@@ -54,7 +59,13 @@ class ContactController {
   async delete(req, res){
     //Deletar registro
     const id = req.params.id;
+    const userExists = await CategoriesRepository.findById(id)
+
+    if(!userExists){
+      return res.status(404).json({ error: "User not found." });
+    }
     await CategoriesRepository.delete(id);
+
 
     res.sendStatus(204);
 
