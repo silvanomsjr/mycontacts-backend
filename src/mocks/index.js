@@ -24,7 +24,7 @@ const fakeArray = [
 
   {
     id: uuid(),
-    name: "Gozado",
+    name: "Kaka",
     phone: 34343434,
     email: "gksd@gmail.com",
   },
